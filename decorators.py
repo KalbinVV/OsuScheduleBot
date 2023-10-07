@@ -9,7 +9,7 @@ def should_be_registered(func):
             message: telebot.types.Message = args[0]
             user_id = message.from_user.id
         elif isinstance(args[0], telebot.types.CallbackQuery):
-            callback: telebot.types.Message = args[0]
+            callback: telebot.types.CallbackQuery = args[0]
             user_id = callback.from_user.id
         else:
             raise Exception(f'Неизвестный аргумент для декоратора "should_be_registered": {type(args[0])}')
