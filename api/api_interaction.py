@@ -64,3 +64,15 @@ def get_week_schedule(group_id: int) -> dict[str, list[ScheduleRecord]]:
     schedule_dict = parse_as_schedule_records_dict(encoded_dict)
 
     return schedule_dict
+
+
+def get_schedule_at(group_id: int, date: str) -> list[ScheduleRecord]:
+    request = requests.get(f'{config.API_URL}/schedule_at',
+                           params={'group_id': group_id,
+                                   'date': date})
+
+    encoded_list = json.loads(request.json())
+
+    schedule_list = parse_as_schedule_records_list(encoded_list)
+
+    return schedule_list

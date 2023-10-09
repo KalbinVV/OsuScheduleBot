@@ -49,7 +49,6 @@ async def handle_user_init_type(callback: telebot.types.CallbackQuery, user_type
                                reply_markup=make_inline_keyboard(buttons_dict))
 
 
-@should_be_registered
 async def handle_user_init_department(callback: telebot.types.CallbackQuery, department_id: int):
     user_id = callback.from_user.id
 
@@ -71,7 +70,6 @@ async def handle_user_init_department(callback: telebot.types.CallbackQuery, dep
                            reply_markup=make_inline_keyboard(buttons_dict))
 
 
-@should_be_registered
 async def handle_user_init_stream(callback: telebot.types.CallbackQuery, stream_id: int):
     user_id = callback.from_user.id
 
@@ -96,7 +94,6 @@ async def handle_user_init_stream(callback: telebot.types.CallbackQuery, stream_
                            reply_markup=make_inline_keyboard(buttons_dict))
 
 
-@should_be_registered
 async def handle_user_init_group(callback: telebot.types.CallbackQuery, group_id: int):
     user_id = callback.from_user.id
 
