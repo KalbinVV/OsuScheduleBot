@@ -12,7 +12,7 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'users'
 
-    id = Column(Integer, unique=True, primary_key=True)
+    id = Column(BigInteger, unique=True, primary_key=True)
     department_id = Column(Integer)
     stream_id = Column(Integer)
     group_id = Column(Integer)
