@@ -1,6 +1,5 @@
-from sqlalchemy import create_engine, Column, Integer, String, Text, ForeignKey, BigInteger
-from sqlalchemy.orm import declarative_base, sessionmaker
-from sqlalchemy.orm import Session
+from sqlalchemy import create_engine, Column, Integer, BigInteger
+from sqlalchemy.orm import declarative_base
 
 import config
 
@@ -16,3 +15,7 @@ class User(Base):
     department_id = Column(Integer)
     stream_id = Column(Integer)
     group_id = Column(Integer)
+
+
+def init_db():
+    Base.metadata.create_all(engine)

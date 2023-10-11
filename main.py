@@ -3,6 +3,7 @@ import asyncio
 import telebot.types
 
 from bot import ASYNC_BOT
+from db import init_db
 from handlers.user_buttons_handlers import handle_user_information_button, handle_user_schedule_button
 from handlers.user_init_handlers import handle_user_init
 from handlers.user_schedule_handlers import handle_user_schedule
@@ -55,6 +56,8 @@ async def handle_text_messages(message: telebot.types.Message):
 
 
 def main():
+    init_db()
+
     asyncio.run(bot.polling())
 
 

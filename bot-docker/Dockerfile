@@ -1,9 +1,9 @@
 from python:3.11.6-alpine
 
-copy ./ $HOME/app/
+copy ./ app/
 
-WORKDIR $HOME/app/
+WORKDIR app/
 
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["sh", "start-bot.sh"]
+ENTRYPOINT ["python", "main.py"]

@@ -4,6 +4,7 @@
 
 ## Запуск через Docker:
 
-1. В .env измените токен на свой
-2. ./build.sh
+1. ./build.sh
+2. В .env измените токен на свой
+3. docker-compose up
 
