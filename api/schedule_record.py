@@ -1,6 +1,4 @@
-import json
 from dataclasses import dataclass
-from typing import Any
 
 
 @dataclass
@@ -8,6 +6,7 @@ class ScheduleRecord:
     class_id: int
     class_name: str
     class_room: str
+    class_type: str
     teacher_name: str
 
 
@@ -27,6 +26,7 @@ def parse_as_schedule_records_list(encoded_list: list) -> list[ScheduleRecord]:
         decoded_list.append(ScheduleRecord(obj['class_id'],
                                            obj['class_name'],
                                            obj['class_room'],
+                                           obj['class_type'],
                                            obj['teacher_name']))
 
     return decoded_list

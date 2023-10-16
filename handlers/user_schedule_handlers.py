@@ -6,6 +6,7 @@ from api.api_interaction import get_today_schedule, get_tomorrow_schedule, get_w
 from bot import ASYNC_BOT
 from decorators import should_be_registered
 from utils import chat_utils
+from utils.format_utils import format_weekday_to_string
 from utils.users_utils import get_user
 
 bot = ASYNC_BOT
@@ -34,7 +35,9 @@ async def handle_user_schedule_today(callback: telebot.types.CallbackQuery):
     today_day = datetime.datetime.now()
     today_day_str = today_day.strftime('%d.%m.20%y')
 
-    await chat_utils.print_schedule_day(schedule_list, bot, user.id, 'Расписание на сегодня: ',
+    weekday = format_weekday_to_string(today_day.isoweekday())
+
+    await chat_utils.print_schedule_day(schedule_list, bot, user.id, f'Расписание на сегодня ({weekday}): ',
                                         enable_keyboard=True,
                                         date_str=today_day_str)
 
@@ -51,7 +54,9 @@ async def handle_user_schedule_tomorrow(callback: telebot.types.CallbackQuery):
 
     tomorrow_day_str = tomorrow_day.strftime('%d.%m.20%y')
 
-    await chat_utils.print_schedule_day(schedule_list, bot, user.id, 'Расписание на завтра: ',
+    weekday = format_weekday_to_string(tomorrow_day.isoweekday())
+
+    await chat_utils.print_schedule_day(schedule_list, bot, user.id, f'Расписание на завтра ({weekday}): ',
                                         enable_keyboard=True,
                                         date_str=tomorrow_day_str)
 
@@ -65,7 +70,10 @@ async def handle_user_schedule_week(callback: telebot.types.CallbackQuery):
     schedule_dict = get_week_schedule(user.group_id)
 
     for date, schedule_list in schedule_dict.items():
-        await chat_utils.print_schedule_day(schedule_list, bot, user.id, f'Расписание на {date}: ')
+        date_obj = datetime.datetime.strptime(date, '%d.%m.20%y')
+        weekday = format_weekday_to_string(date_obj.isoweekday())
+
+        await chat_utils.print_schedule_day(schedule_list, bot, user.id, f'Расписание на {date} ({weekday}): ')
 
 
 async def handle_user_schedule_at(callback: telebot.types.CallbackQuery):
@@ -76,11 +84,13 @@ async def handle_user_schedule_at(callback: telebot.types.CallbackQuery):
 
     date_str = date_obj.strftime('%d.%m.20%y')
 
+    weekday = format_weekday_to_string(date_obj.isoweekday())
+
     user = get_user(callback.from_user.id)
 
     schedule_list = get_schedule_at(user.group_id, date)
 
     await chat_utils.print_schedule_day(schedule_list, bot, user.id,
-                                        f'Расписание на {date}: ',
+                                        f'Расписание на {date} ({weekday}) : ',
                                         enable_keyboard=True,
                                         date_str=date_str)

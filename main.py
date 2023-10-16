@@ -16,7 +16,7 @@ bot = ASYNC_BOT
 async def init_user(message: telebot.types.Message):
     inline_keyboard = make_inline_keyboard({"Я студент 🧑‍🎓": "init_user#type#student"})
 
-    keyboard = make_reply_keyboard(['Расписание', 'Информация', 'Сброс'])
+    keyboard = make_reply_keyboard(['Расписание 📆', 'Информация ℹ️', 'Сброс 🔄'])
 
     await bot.send_message(message.chat.id, '<b> Добро пожаловать в бот для расписаний ОГУ!</b>',
                            parse_mode='HTML',
@@ -47,11 +47,11 @@ async def handle_query(callback: telebot.types.CallbackQuery):
 
 @bot.message_handler(func=lambda message: True)
 async def handle_text_messages(message: telebot.types.Message):
-    if message.text == 'Сброс':
+    if message.text == 'Сброс 🔄':
         await init_user(message)
-    elif message.text == 'Информация':
+    elif message.text == 'Информация ℹ️':
         await handle_user_information_button(message)
-    elif message.text == 'Расписание':
+    elif message.text == 'Расписание 📆':
         await handle_user_schedule_button(message)
 
 

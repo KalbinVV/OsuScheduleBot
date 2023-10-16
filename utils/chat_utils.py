@@ -29,7 +29,7 @@ async def print_schedule_day(schedule_list: list[ScheduleRecord], bot: AsyncTele
         class_id = schedule_record.class_id
 
         result_string += f'<b>{class_id} пара ({timetable_of_classes[class_id]}): </b>\n' \
-                         f'{schedule_record.class_name}\n' \
+                         f'{schedule_record.class_name} {get_emoji_of_class_type(schedule_record.class_type)} \n' \
                          f'{schedule_record.class_room}\n' \
                          f'{schedule_record.teacher_name}\n\n'
 
@@ -42,3 +42,16 @@ async def print_schedule_day(schedule_list: list[ScheduleRecord], bot: AsyncTele
         await bot.send_message(chat_id, result_string, parse_mode='HTML', reply_markup=inline_keyboard)
     else:
         await bot.send_message(chat_id, result_string, parse_mode='HTML')
+
+
+def get_emoji_of_class_type(class_type: str) -> str:
+    emoji_dict = {
+        '(лекционное занятие)': '👨‍🏫',
+        '(лабораторная работа)': '🧪',
+        '(практическое занятие)': '🔨'
+    }
+
+    return emoji_dict.get(class_type, '')
+
+
+

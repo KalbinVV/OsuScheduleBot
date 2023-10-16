@@ -106,10 +106,7 @@ async def handle_user_init_group(callback: telebot.types.CallbackQuery, group_id
 
     await bot.send_message(user_id,
                            f'<b>Вы успешно зарегистрировались!</b>\n'
-                           f'<i>Ваш идентификатор: </i>{user.id}\n'
-                           f'<i>Идентификатор вашего факультета/института: </i>{user.department_id}\n'
-                           f'<i>Идентификатор вашего потока: </i>{user.stream_id}\n'
-                           f'<i>Идентификатор вашей группы:</i> {user.group_id}\n',
+                           f'<b>Для дальнейшей работы, воспользуйтесь клавиатурой бота!</b>',
                            parse_mode='HTML')
 
     session.close()
